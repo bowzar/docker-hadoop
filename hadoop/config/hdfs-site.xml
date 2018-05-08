@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<configuration>
+    <property>
+        <name>dfs.nameservices</name>
+        <value>hadoop-cluster</value>
+    </property>
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///data/hdfs/namenode</value>
+        <description>NameNode directory for namespace and transaction logs storage.</description>
+    </property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///data/hdfs/datanode</value>
+        <description>DataNode directory</description>
+    </property>
+    <property>
+        <name>dfs.namenode.checkpoint.dir</name>
+        <value>file:///data/hdfs/snn</value>
+    </property>
+    <property>
+        <name>dfs.namenode.checkpoint.edits.dir</name>
+        <value>file:///data/hdfs/snn</value>
+    </property>
+</configuration>

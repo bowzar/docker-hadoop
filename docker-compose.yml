@@ -1,0 +1,82 @@
+version: '2'
+services:
+  namenode:
+    image: 192.168.20.10:8082/yulintu/hadoop-namenode:2.8.3
+    hostname: hadoop-namenode
+    container_name: hadoop-namenode
+    volumes:
+      - /hide:/hide
+    ports:
+      - "50070:50070"
+      - "8020:8020"
+    restart: unless-stopped
+
+  datanode1:
+    image: 192.168.20.10:8082/yulintu/hadoop-datanode:2.8.3
+    hostname: hadoop-datanode1
+    container_name: hadoop-datanode1
+    volumes:
+      - /hide:/hide
+    depends_on:
+      - namenode
+    restart: unless-stopped
+
+  datanode2:
+    image: 192.168.20.10:8082/yulintu/hadoop-datanode:2.8.3
+    hostname: hadoop-datanode2
+    container_name: hadoop-datanode2
+    volumes:
+      - /hide:/hide
+    depends_on:
+      - namenode
+    restart: unless-stopped
+
+  resourcemanager:
+    image: 192.168.20.10:8082/yulintu/hadoop-resourcemanager:2.8.3
+    hostname: hadoop-resourcemanager
+    container_name: hadoop-resourcemanager
+    ports:
+      - "8088:8088"
+    volumes:
+      - /hide:/hide
+    depends_on:
+      - namenode
+    restart: unless-stopped
+
+  nodemanager1:
+    image: 192.168.20.10:8082/yulintu/hadoop-nodemanager:2.8.3
+    hostname: hadoop-nodemanager1
+    container_name: hadoop-nodemanager1
+    volumes:
+      - /hide:/hide
+    depends_on:
+      - resourcemanager
+    restart: unless-stopped
+
+  nodemanager2:
+    image: 192.168.20.10:8082/yulintu/hadoop-nodemanager:2.8.3
+    hostname: hadoop-nodemanager2
+    container_name: hadoop-nodemanager2
+    volumes:
+      - /hide:/hide
+    depends_on:
+      - resourcemanager
+    restart: unless-stopped
+
+  historyserver:
+    image: 192.168.20.10:8082/yulintu/hadoop-historyserver:2.8.3
+    hostname: hadoop-historyserver
+    container_name: hadoop-historyserver
+    volumes:
+      - /hide:/hide
+    depends_on:
+      - resourcemanager
+    restart: unless-stopped
+    ports:
+      - "8188:8188"
+
+# volumes:
+#   hadoop_namenode:
+#   hadoop_datanode1:
+#   hadoop_datanode2:
+#   hadoop_datanode3:
